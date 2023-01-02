@@ -3,6 +3,8 @@ Le champ version spécifie la version de la syntaxe docker-compose.yml utilisée
 Le service apache est construit à partir du Dockerfile situé dans le répertoire ./www/apache. Il écoute sur le port 80 et le mappe sur le port 80 de la machine hôte. Le répertoire ./www/src sur l'hôte est monté en tant que volume à /usr/local/apache2/htdocs/ dans le conteneur. Le champ depends_on spécifie que ce service dépend du service php, ce qui signifie que le service php doit être démarré avant le service apache.
 
 Le service mysql est basé sur l'image mysql:5.7 et est donné plusieurs variables d'environnement pour définir le mot de passe root, créer une base de données et un utilisateur, et définir le mot de passe de l'utilisateur. Le répertoire ./db sur l'hôte est monté en tant que volume à /var/lib/mysql dans le conteneur.
+J'utilise un Dockerfile pour copier la configuartion apache
+
 
 Le service phpmyadmin est basé sur l'image phpmyadmin/phpmyadmin et est donné la variable d'environnement PMA_HOST pour spécifier le nom d'hôte du serveur MySQL et le MYSQL_ROOT_PASSWORD pour définir le mot de passe root pour MySQL. Il écoute sur le port 8080 et le mappe sur le port 80 de la machine hôte. Le champ depends_on spécifie que ce service dépend du service mysql.
 
