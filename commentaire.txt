@@ -1,0 +1,7 @@
+La première ligne indique la version de la syntaxe utilisée par le fichier, qui est la version 2 dans ce cas.
+
+La section services définit les différents services qui font partie de la stack. Dans ce cas, il y a trois services : www, db et phpmyadmin.
+
+Le service www est construit à partir du contenu du répertoire courant (.). Le port 80 du conteneur est exposé sur le port 8001 de l'hôte, et le répertoire local ./www est monté dans le répertoire /var/www/html/ du conteneur. Le service db est lié au service www, ce qui signifie que le service www peut accéder à la base de données en utilisant le nom de service db. Le service www est également connecté au réseau par défaut.
+
+Le service db utilise l'image Docker mysql et expose le port 3306 du conteneur sur le port 3306 de l'hôte. Des variables d'environnement sont définies pour configurer la base de données avec un nom de base de données, un nom d'utilis
