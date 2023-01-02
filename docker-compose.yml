@@ -8,7 +8,7 @@ services:
       - ./www/src:/usr/local/apache2/htdocs/
     depends_on:
       - php
-  mysql:
+  db:
     image: mysql
     ports: 
         - "3306:3306"
@@ -16,20 +16,16 @@ services:
         MYSQL_DATABASE: test
         MYSQL_USER: user
         MYSQL_PASSWORD: test
-        MYSQL_ROOT_PASSWORD: test
+        MYSQL_ROOT_PASSWORD: root
     volumes:
         - ./db:/docker-entrypoint-initdb.d
         - persistent:/var/lib/mysql
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
-    environment:
-        MYSQL_USER: user
-        MYSQL_PASSWORD: test
-        MYSQL_ROOT_PASSWORD: test
     ports:
-      - "8080:80"
+      - 8080:80
     depends_on:
-      - mysql
+      - db
   php:
     image: php:7.4-fpm
     volumes:
@@ -38,4 +34,6 @@ services:
       - "9000:9000"
 
 volumes:
-    persistent:
+  db:
+  php:
+  persistent:
